@@ -19,6 +19,7 @@ $course_zones = api_get_course_zones($location_ids);
 $course_professeurs = api_get_course_professeurs($post_ids);
 $lower_ages = api_get_p_age($post_ids);
 $upper_ages = api_get_p_age2($post_ids);
+$hideinsearches = api_get_hide_in_search($post_ids);
 
 
 
@@ -60,6 +61,18 @@ foreach ($posts_array as $post) {
     }
 
 
+    // get the hide_in_search
+    $post->hide_in_search = false;
+    $hsea = array_filter(
+        $hideinsearches,
+        function ($e)  use ($post) {
+            return $e->post_id == $post->ID;
+        }
+    );
+    $hsear =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $hsea));
+    if ($hsear) {
+        $post->hide_in_search = $hsear[0];
+    }
 
 
 

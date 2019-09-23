@@ -409,12 +409,27 @@ function api_get_p_age2($course_ids){
 									FROM  `wp_postmeta`
 									WHERE ( $extra_sql ) AND meta_key = 'p_age2' ");
 
-
-
 		return $course_p_age2s;
 	endif;
 }
 }
+
+if(!function_exists('api_get_hide_in_search')) {
+	function api_get_hide_in_search($course_ids){
+		if (sizeof($course_ids) > 0):
+			// GET META HIDE_IN_SEARCH
+			global $wpdb;
+			$extra_sql = ' post_id = ';
+			$extra_sql .= implode(' OR post_id =   ', $course_ids);
+			$course_hides = $wpdb->get_results("SELECT meta_value, post_id
+										FROM  `wp_postmeta`
+										WHERE ( $extra_sql ) AND meta_key = 'hide_in_search' ");
+	
+			return $course_hides;
+		endif;
+	}
+	}
+	
 
 
 if(!function_exists('api_remove_unnecessary_things')) {
