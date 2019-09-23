@@ -71,7 +71,7 @@ foreach ($posts_array as $post) {
     );
     $hsear =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $hsea));
     if ($hsear) {
-        $post->hide_in_search = $hsear[0];
+        $post->hide_in_search = ($hsear[0] == 1 || $hsear[0] == '1' );
     }
 
 
