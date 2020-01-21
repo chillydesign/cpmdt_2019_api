@@ -697,6 +697,11 @@ if(!function_exists('api_get_id_from_object')) {
 		return $obj->ID;
 	}
 }
+if(!function_exists('api_get_wid_from_object')) {
+	function api_get_wid_from_object($obj){
+		return $obj->wid;
+	}
+}
 
 
 
