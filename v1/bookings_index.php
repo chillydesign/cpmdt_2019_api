@@ -20,9 +20,8 @@ if (isset($_GET['id'])) {
 }
 
 
-$booking_ids =  array_map(create_function('$p', 'return $p->ID;'), $bookings_array);
-
-
+// $booking_ids =  array_map(create_function('$p', 'return $p->ID;'), $bookings_array);
+$booking_ids =  array_map('api_get_id_from_object', $bookings_array);
 
 
 

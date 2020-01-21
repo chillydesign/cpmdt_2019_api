@@ -692,6 +692,14 @@ function api_split_number_into_chunks($number, $chunks) {
 }
 
 
+if(!function_exists('api_get_id_from_object')) {
+	function api_get_id_from_object($obj){
+		return $obj->ID;
+	}
+}
+
+
+
 if(!function_exists('api_format_phone_number')) {
 function api_format_phone_number($number){
 
