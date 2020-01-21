@@ -10,11 +10,15 @@ $posts_array = get_posts(
         'order'=> 'ASC'
       )
    );
-$post_ids =  array_map(create_function('$p', 'return $p->ID;'), $posts_array);
+// $post_ids =  array_map(create_function('$p', 'return $p->ID;'), $posts_array);
+$post_ids =  array_map('api_get_id_from_object', $posts_array);
+
 $course_ageranges = api_get_course_ageranges($post_ids);
 $course_categories = api_get_course_cats($post_ids);
 $course_locations = api_get_course_locations($post_ids);
-$location_ids =  array_map(create_function('$p', 'return $p->wid;'), $course_locations);
+// $location_ids =  array_map(create_function('$p', 'return $p->wid;'), $course_locations);
+$location_ids =  array_map('api_get_wid_from_object', $course_locations);
+
 $course_zones = api_get_course_zones($location_ids);
 $course_professeurs = api_get_course_professeurs($post_ids);
 $lower_ages = api_get_p_age($post_ids);
