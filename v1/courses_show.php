@@ -36,7 +36,9 @@ $upper_ages = api_get_p_age2($post_ids);
             return $e->post_id == $post->ID;
         }
     );
-    $l_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $l_age));
+    // $l_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $l_age));
+    $l_ages =  array_values(array_map('api_get_meta_value_from_object', $l_age));
+
     if ($l_ages) {
         $post->lower_age = $l_ages[0];
     }
@@ -50,7 +52,9 @@ $upper_ages = api_get_p_age2($post_ids);
             return $e->post_id == $post->ID;
         }
     );
-    $u_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $u_age));
+    // $u_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $u_age));
+    $u_ages =  array_values(array_map('api_get_meta_value_from_object', $u_age));
+
     if ($u_ages) {
         $post->upper_age = $u_ages[0];
     }
@@ -64,7 +68,9 @@ $upper_ages = api_get_p_age2($post_ids);
             return $e->wppid == $post->ID;
         }
     );
-    $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
+    // $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
+    $course_location_ids =  array_values(array_map('api_get_wid_from_object', $location));
+
     $post->locations = $location;
     $post->location_ids = $course_location_ids;
 
@@ -79,7 +85,9 @@ $upper_ages = api_get_p_age2($post_ids);
             }
         );
 
-        $zones =  array_values(array_map(create_function('$l', 'return $l->meta_value;'), $zone));
+        // $zones =  array_values(array_map(create_function('$l', 'return $l->meta_value;'), $zone));
+        $zones =  array_values(array_map('api_get_meta_value_from_object', $zone));
+
         if ($zones) {
             $return_zone_ids = array();
             foreach ($zones as $zonearray) {
