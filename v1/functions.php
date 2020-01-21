@@ -823,7 +823,8 @@ function api_get_result_from_array( $collection, $inscription  ) {
             return $e->post_id == $inscription->ID;
         }
     );
-    $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+    // $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+    $metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
 
 
     // turn it into a proper string to output

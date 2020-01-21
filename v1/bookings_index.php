@@ -53,7 +53,8 @@ foreach ($bookings_array as $booking) {
 				return $e->post_id == $booking->ID;
 			}
 		);
-		$metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+		// $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+		$metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
 
 		// turn it into a proper string to output
 		$metafield_string = api_process_metafield($metafield);
