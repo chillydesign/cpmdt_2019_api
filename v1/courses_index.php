@@ -59,7 +59,9 @@ foreach ($posts_array as $post) {
     );
     $agrang_val = array_values($agranges);
     if (sizeof($agrang_val) > 0) {
-        $post->age_ranges =  (array_map(create_function('$p', 'return $p->slug;'), $agrang_val));
+        // $post->age_ranges =  (array_map(create_function('$p', 'return $p->slug;'), $agrang_val));
+        $post->age_ranges =  array_map('api_get_slug_from_object', $agrang_val);
+
     } else {
         $post->age_ranges = array();
     }
@@ -73,7 +75,9 @@ foreach ($posts_array as $post) {
             return $e->post_id == $post->ID;
         }
     );
-    $hsear =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $hsea));
+    // $hsear =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $hsea));
+    $hsear =  array_values(array_map('api_get_meta_value_from_object', $hsea));
+
     if ($hsear) {
         $post->hide_in_search = ($hsear[0] == 1 || $hsear[0] == '1' );
     }
@@ -88,7 +92,8 @@ foreach ($posts_array as $post) {
             return $e->post_id == $post->ID;
         }
     );
-    $l_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $l_age));
+    // $l_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $l_age));
+    $l_ages =  array_values(array_map('api_get_meta_value_from_object', $l_age));
     if ($l_ages) {
         $post->lower_age = $l_ages[0];
     }
@@ -102,7 +107,8 @@ foreach ($posts_array as $post) {
             return $e->post_id == $post->ID;
         }
     );
-    $u_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $u_age));
+    // $u_ages =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $u_age));
+    $u_ages =  array_values(array_map('api_get_meta_value_from_object', $u_age));
     if ($u_ages) {
         $post->upper_age = $u_ages[0];
     }
@@ -116,7 +122,9 @@ foreach ($posts_array as $post) {
             return $e->wppid == $post->ID;
         }
     );
-    $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
+    // $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
+    $course_location_ids =  array_values(array_map('api_get_wid_from_object', $location));
+
     $post->locations = $location;
     $post->location_ids = $course_location_ids;
 
@@ -132,7 +140,9 @@ foreach ($posts_array as $post) {
             }
         );
 
-        $zones =  array_values(array_map(create_function('$l', 'return $l->meta_value;'), $zone));
+        // $zones =  array_values(array_map(create_function('$l', 'return $l->meta_value;'), $zone));
+        $zones =  array_values(array_map('api_get_meta_value_from_object', $zone));
+
         if ($zones) {
             $return_zone_ids = array();
             foreach ($zones as $zonearray) {

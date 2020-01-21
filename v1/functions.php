@@ -702,6 +702,16 @@ if(!function_exists('api_get_wid_from_object')) {
 		return $obj->wid;
 	}
 }
+if(!function_exists('api_get_meta_value_from_object')) {
+	function api_get_meta_value_from_object($obj){
+		return $obj->meta_value;
+	}
+}
+if(!function_exists('api_get_slug_from_object')) {
+	function api_get_slug_from_object($obj){
+		return $obj->slug;
+	}
+}
 
 
 
