@@ -42,7 +42,7 @@ $inscription_course_option = api_get_booking_metafield( $inscription_ids, 'cours
 
 
 
-$data =  implode(';' , $all_fields ) .  ',ID' .  "\n";
+$data =  implode(';' , $all_fields ) .  ';ID' .  "\n";
 
 
 $returned_inscriptions_array = array();

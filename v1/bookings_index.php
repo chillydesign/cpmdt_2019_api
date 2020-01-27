@@ -32,7 +32,7 @@ foreach (api_all_booking_fields() as $field => $value) {
 
 
 //$data =  'nom,cours,date,' . implode(';' , api_all_booking_fields_headers()     ) .   "\n";
-$data =  "Date, Évènement Id, Titre de l'Évènement," . implode(';' , api_all_booking_fields_headers() ) .  "\n";
+$data =  "Date; Évènement Id; Titre de l'Évènement;" . implode(';' , api_all_booking_fields_headers() ) .  "\n";
 
 
 $returned_bookings_array = array();
