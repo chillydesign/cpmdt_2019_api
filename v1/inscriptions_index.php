@@ -42,7 +42,7 @@ $inscription_course_option = api_get_booking_metafield( $inscription_ids, 'cours
 
 
 
-$data =  implode(',' , $all_fields ) .  ',ID' .  "\n";
+$data =  implode(';' , $all_fields ) .  ',ID' .  "\n";
 
 
 $returned_inscriptions_array = array();
@@ -130,7 +130,7 @@ foreach ($inscriptions_array as $inscription) {
 
     $ar =  $meta_strings;
 
-    $data .=  implode(',', $ar);
+    $data .=  implode(';', $ar);
     $data .=  "\n";
     }
 
@@ -152,7 +152,7 @@ $encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
 $filename = $file . '_'.date('Y-m-d_H-i',time());
 header('Content-type: application/vnd.ms-excel');
 header('Content-disposition: csv' . date('Y-m-d') . '.csv');
-header( 'Content-disposition: filename='.$filename.'.csv');
+header('Content-disposition: filename='.$filename.'.csv');
 header('Content-Length: '. strlen($encoded_csv));
 $encoded_csv =   chr(255) . chr(254) . $encoded_csv;
 print $encoded_csv;

@@ -31,8 +31,8 @@ foreach (api_all_booking_fields() as $field => $value) {
 }
 
 
-//$data =  'nom,cours,date,' . implode(',' , api_all_booking_fields_headers()     ) .   "\n";
-$data =  "Date, Évènement Id, Titre de l'Évènement," . implode(',' , api_all_booking_fields_headers() ) .  "\n";
+//$data =  'nom,cours,date,' . implode(';' , api_all_booking_fields_headers()     ) .   "\n";
+$data =  "Date, Évènement Id, Titre de l'Évènement," . implode(';' , api_all_booking_fields_headers() ) .  "\n";
 
 
 $returned_bookings_array = array();
@@ -76,6 +76,7 @@ foreach ($bookings_array as $booking) {
 
         if ($event_post) {
             $event = str_replace(',', ' ', $event_post->post_title );
+            $event = str_replace(';', ' ', $event_post->post_title );
         }
     }
 
@@ -96,8 +97,8 @@ foreach ($bookings_array as $booking) {
 
 
     if ($include_booking_in_export) {
-        //$data .=  implode(',', $ar);
-        $data .=  implode(',', $ar);
+
+        $data .=  implode(';', $ar);
         $data .=  "\n";
     }
 

@@ -218,7 +218,7 @@ foreach ($posts_array as $post) {
     $searchable_fields = implode('  ', $searchable_fields);
     $searchable_fields = wp_strip_all_tags($searchable_fields);
     $searchable_fields = str_replace(array("\n","\r"), ' ', $searchable_fields);
-    $searchable_fields = str_replace(array("!","’" , ',' , '/' ,':', "?", '.', '–' ), ' ', $searchable_fields);
+    $searchable_fields = str_replace(array("!","’" , ',' , '/' ,':', ';', "?", '.', '–' ), ' ', $searchable_fields);
     $searchable_fields = remove_accents($searchable_fields);
     $searchable_fields = strtolower($searchable_fields);
     $post->searchfield = $searchable_fields;
