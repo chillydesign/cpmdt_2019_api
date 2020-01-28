@@ -27,7 +27,7 @@ $agenda_ids =  array_map('api_get_id_from_object', $agendas_array);
 
 foreach (api_all_agenda_fields() as $field => $value) {
 	$fn = 'agenda_' . $field;
-	$$fn = api_get_agenda_metafield($agenda_ids,  $field);
+	$$fn = api_get_booking_metafield($agenda_ids,  $field);
 }
 
 
