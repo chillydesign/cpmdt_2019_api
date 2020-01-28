@@ -52,8 +52,33 @@ $data = 'Titre;' .   implode(';' , api_all_agenda_fields_headers() ) .  "\n";
 foreach ($agendas_array as $agenda) {
 
 
+    // get the categories for the specific agenda
+    $cats = array_filter(
+        $agenda_categories,
+        function ($e)  use ($agenda) {
+            return $e->object_id == $agenda->ID;
+        }
+    );
+    $agenda->categories = array_values($cats);
 
+    // get the programs for the specific agenda
+    $progs = array_filter(
+        $agenda_programs,
+        function ($e)  use ($agenda) {
+            return $e->object_id == $agenda->ID;
+        }
+    );
+    $agenda->programs = array_values($progs);
+    
 
+    // get the types for the specific agenda
+    $typs = array_filter(
+        $agenda_types,
+        function ($e)  use ($agenda) {
+            return $e->object_id == $agenda->ID;
+        }
+    );
+    $agenda->types = array_values($typs);
 
 	$meta_strings = array();
 	foreach (api_all_agenda_fields() as $field =>$value) {
@@ -119,10 +144,7 @@ foreach ($agendas_array as $agenda) {
 
 
 
-    echo json_encode( $agenda_categories ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
-    echo json_encode( $agenda_programs ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
-    echo json_encode( $agenda_types ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
-
+    echo json_encode( $agendas_array ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
 
      
  } else {
