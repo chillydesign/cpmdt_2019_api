@@ -63,17 +63,17 @@ foreach ($agendas_array as $agenda) {
         );
         
 
-                    // $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
-                    $metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
-                    // turn it into a proper string to output
-                    $metafield_string = api_process_metafield($metafield);
+        // $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+        $metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
+        // turn it into a proper string to output
+        $metafield_string = api_process_metafield($metafield);
 
 
         if ($field == 'address_id') {
 
             if ($metafield_string) {
                 foreach($locations as $location):
-                    if ($location->ID == $metafield_string) {
+                    if ($location->ID == intval($metafield_string)) {
                         $metafield_string = $location->post_title;
                     }
                 endforeach;
