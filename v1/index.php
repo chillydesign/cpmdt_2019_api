@@ -21,6 +21,8 @@ if ( isset($_GET['course_id'])  ) {
     include('bookings_index.php');
 }  else if ( isset($_GET['inscriptions'])  ) {
     include('inscriptions_index.php');
+}  else if ( isset($_GET['agenda'])  ) {
+    include('agenda_index.php');
 } else {
     include('courses_index.php');
 }
