@@ -44,7 +44,7 @@ foreach (api_all_agenda_fields() as $field => $value) {
 
 
 //$data =  'nom,cours,date,' . implode(';' , api_all_agenda_fields_headers()     ) .   "\n";
-$data = 'Titre;' .   implode(';' , api_all_agenda_fields_headers() ) .  "\n";
+$data = 'Titre;Catégorie;Programme;Type;' .   implode(';' , api_all_agenda_fields_headers() ) .  "\n";
 
 
 
@@ -59,7 +59,13 @@ foreach ($agendas_array as $agenda) {
             return $e->object_id == $agenda->ID;
         }
     );
-    $agenda->categories = array_values($cats);
+    $cats =  array_values($cats);
+    if (sizeof($cats) > 0 ) {
+        $agenda->category = $cats[0]->name;
+    } else {
+        $agenda->category = '-';
+    }
+    
 
     // get the programs for the specific agenda
     $progs = array_filter(
@@ -68,7 +74,14 @@ foreach ($agendas_array as $agenda) {
             return $e->object_id == $agenda->ID;
         }
     );
-    $agenda->programs = array_values($progs);
+    $progs = array_values($progs);
+    if (sizeof($cats) > 0 ) {
+        $agenda->program = $progs[0]->name;
+    } else {
+        $agenda->program = '-';
+    }
+
+
     
 
     // get the types for the specific agenda
@@ -78,7 +91,13 @@ foreach ($agendas_array as $agenda) {
             return $e->object_id == $agenda->ID;
         }
     );
-    $agenda->types = array_values($typs);
+
+    $typs =  array_values($typs);
+    if (sizeof($cats) > 0 ) {
+        $agenda->type = $typs[0]->name;
+    } else {
+        $agenda->type = '-';
+    }
 
 	$meta_strings = array();
 	foreach (api_all_agenda_fields() as $field =>$value) {
@@ -120,7 +139,10 @@ foreach ($agendas_array as $agenda) {
 
 	$ar = array(
 
-        api_remove_line_breaks($agenda->post_title)
+        api_remove_line_breaks($agenda->post_title),
+        api_remove_line_breaks($agenda->category),
+        api_remove_line_breaks($agenda->program),
+        api_remove_line_breaks($agenda->type),
 
 	);
 
@@ -144,7 +166,7 @@ foreach ($agendas_array as $agenda) {
 
 
 
-    echo json_encode( $agendas_array ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
+    echo json_encode( $ar ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
 
      
  } else {
