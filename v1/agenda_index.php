@@ -65,14 +65,14 @@ foreach ($agendas_array as $agenda) {
 
 
 
-	$ar = array(
-        // $agenda->post_date,
-        // $agenda->post_parent,
-        $event,
+	// $ar = array(
+    //     // $agenda->post_date,
+    //     // $agenda->post_parent,
+    //     // $event,
 
-	);
+	// );
 
-	$ar =  array_merge($ar, $meta_strings);
+	$ar =  $meta_strings;
 
 
     $data .=  implode(';', $ar);
