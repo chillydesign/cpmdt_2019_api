@@ -185,6 +185,7 @@ function api_get_course_descriptions($course_ids){
 
      $new_string = str_replace(array("\r", "\n"), '', $string);
      $new_string = str_replace(';', ' ', $new_string);
+     $new_string = str_replace(',', ' ', $new_string);
      $new_string = strip_tags($new_string);
      return $new_string;
 

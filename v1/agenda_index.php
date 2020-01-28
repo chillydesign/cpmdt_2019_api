@@ -92,7 +92,7 @@ foreach ($agendas_array as $agenda) {
 
 	$ar = array(
 
-        $agenda->post_title
+        api_remove_line_breaks($agenda->post_title)
 
 	);
 
