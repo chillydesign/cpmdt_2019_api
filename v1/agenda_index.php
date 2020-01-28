@@ -19,6 +19,14 @@ if (isset($_GET['id'])) {
     ) );
 }
 
+$locations = get_posts(array(
+    'post_type'  => 'location',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+) );
+
+
+
 
 // $agenda_ids =  array_map(create_function('$p', 'return $p->ID;'), $agendas_array);
 $agenda_ids =  array_map('api_get_id_from_object', $agendas_array);
@@ -32,7 +40,7 @@ foreach (api_all_agenda_fields() as $field => $value) {
 
 
 //$data =  'nom,cours,date,' . implode(';' , api_all_agenda_fields_headers()     ) .   "\n";
-$data =  implode(';' , api_all_agenda_fields_headers() ) .  "\n";
+$data = 'Titre;' .   implode(';' , api_all_agenda_fields_headers() ) .  "\n";
 
 
 $returned_agendas_array = array();
@@ -52,12 +60,29 @@ foreach ($agendas_array as $agenda) {
 			function ($e)  use ($agenda) {
 				return $e->post_id == $agenda->ID;
 			}
-		);
-		// $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
-		$metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
+        );
+        
 
-		// turn it into a proper string to output
-		$metafield_string = api_process_metafield($metafield);
+                    // $metafield =  array_values(array_map(create_function('$p', 'return $p->meta_value;'), $metafield));
+                    $metafield =  array_values(array_map('api_get_meta_value_from_object', $metafield));
+                    // turn it into a proper string to output
+                    $metafield_string = api_process_metafield($metafield);
+
+
+        if ($field == 'address_id') {
+
+            if ($metafield_string) {
+                foreach($locations as $location):
+                    if ($location->ID == $metafield_string) {
+                        $metafield_string = $location->post_title;
+                    }
+                endforeach;
+            }
+
+        } else {
+
+        }
+
 
 
 		array_push($meta_strings , $metafield_string);
@@ -65,14 +90,13 @@ foreach ($agendas_array as $agenda) {
 
 
 
-	// $ar = array(
-    //     // $agenda->post_date,
-    //     // $agenda->post_parent,
-    //     // $event,
+	$ar = array(
 
-	// );
+        $agenda->post_title
 
-	$ar =  $meta_strings;
+	);
+
+	$ar =  array_merge($ar, $meta_strings);
 
 
     $data .=  implode(';', $ar);

@@ -511,14 +511,12 @@ if(!function_exists('api_all_booking_fields_headers')) {
 if(!function_exists('api_all_agenda_fields')) {
     function api_all_agenda_fields(){
     return array(
-
-		'is_required' => "Inscription à l'événement?",
-		'a_amount' => "Places pour l'événement",
 		'a_date' => "Date de l'événement",
 		'a_time' => "Heure de l'événement",
 		'address_id' => "Lieu de l'événement",
+		'a_amount' => "Places pour l'événement",
 		'archive_date' => "Date de fin",
-
+		'is_required' => "Inscription à l'événement?",
     );
     }
 }
