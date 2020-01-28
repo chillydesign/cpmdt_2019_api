@@ -571,6 +571,84 @@ function api_process_metafield($metafield) {
 }
 
 
+
+
+
+if(!function_exists('api_get_agenda_cats')) {
+	function api_get_agenda_cats($agenda_ids){
+		global $conn;
+	
+		if (sizeof($agenda_ids) > 0):
+			// GET CATEGORIES
+			$agenda_cat_sql = ' object_id = ';
+			$agenda_cat_sql .= implode(' OR object_id =   ', $agenda_ids);
+			$agenda_query = $conn->prepare("SELECT object_id, wp_terms.term_id, name, slug , parent
+										FROM  `wp_term_relationships`
+										LEFT JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id
+										LEFT JOIN wp_term_taxonomy ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_id
+										WHERE ( $agenda_cat_sql ) AND taxonomy = 'agenda-category' ");
+			$agenda_query->execute();
+			# setting the fetch mode
+			$agenda_query->setFetchMode(PDO::FETCH_OBJ);
+			$agenda_categories =  $agenda_query->fetchAll();
+			unset($conn);
+			return $agenda_categories;
+		endif;
+	}
+}
+
+
+if(!function_exists('api_get_agenda_programs')) {
+	function api_get_agenda_programs($agenda_ids){
+		global $conn;
+	
+		if (sizeof($agenda_ids) > 0):
+			// GET CATEGORIES
+			$agenda_cat_sql = ' object_id = ';
+			$agenda_cat_sql .= implode(' OR object_id =   ', $agenda_ids);
+			$agenda_query = $conn->prepare("SELECT object_id, wp_terms.term_id, name, slug , parent
+										FROM  `wp_term_relationships`
+										LEFT JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id
+										LEFT JOIN wp_term_taxonomy ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_id
+										WHERE ( $agenda_cat_sql ) AND taxonomy = 'agenda-program' ");
+			$agenda_query->execute();
+			# setting the fetch mode
+			$agenda_query->setFetchMode(PDO::FETCH_OBJ);
+			$agenda_categories =  $agenda_query->fetchAll();
+			unset($conn);
+			return $agenda_categories;
+		endif;
+	}
+}
+
+
+if(!function_exists('api_get_agenda_types')) {
+	function api_get_agenda_types($agenda_ids){
+		global $conn;
+	
+		if (sizeof($agenda_ids) > 0):
+			// GET CATEGORIES
+			$agenda_cat_sql = ' object_id = ';
+			$agenda_cat_sql .= implode(' OR object_id =   ', $agenda_ids);
+			$agenda_query = $conn->prepare("SELECT object_id, wp_terms.term_id, name, slug , parent
+										FROM  `wp_term_relationships`
+										LEFT JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id
+										LEFT JOIN wp_term_taxonomy ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_id
+										WHERE ( $agenda_cat_sql ) AND taxonomy = 'agenda-type' ");
+			$agenda_query->execute();
+			# setting the fetch mode
+			$agenda_query->setFetchMode(PDO::FETCH_OBJ);
+			$agenda_categories =  $agenda_query->fetchAll();
+			unset($conn);
+			return $agenda_categories;
+		endif;
+	}
+}
+	
+
+	
+
+
 if(!function_exists('api_is_serialized')) {
 function api_is_serialized($string) {
     return (@unserialize($string) !== false);
