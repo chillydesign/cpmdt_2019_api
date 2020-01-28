@@ -19,8 +19,8 @@ if (isset($_GET['id'])) {
     ) );
 }
 
-$locations = get_posts(array(
-    'post_type'  => 'location',
+$addresses = get_posts(array(
+    'post_type'  => 'address',
     'posts_per_page' => -1,
     'post_status' => 'publish',
 ) );
@@ -72,9 +72,9 @@ foreach ($agendas_array as $agenda) {
         if ($field == 'address_id') {
 
             if ($metafield_string) {
-                foreach($locations as $location):
-                    if ($location->ID == intval($metafield_string)) {
-                        $metafield_string = $location->post_title;
+                foreach($addresses as $address):
+                    if ($address->ID == intval($metafield_string)) {
+                        $metafield_string = $address->post_title;
                     }
                 endforeach;
             }
