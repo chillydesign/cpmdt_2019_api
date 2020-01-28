@@ -75,7 +75,7 @@ foreach ($agendas_array as $agenda) {
         }
     );
     $progs = array_values($progs);
-    if (sizeof($cats) > 0 ) {
+    if (sizeof($progs) > 0 ) {
         $agenda->program = $progs[0]->name;
     } else {
         $agenda->program = '-';
@@ -93,7 +93,7 @@ foreach ($agendas_array as $agenda) {
     );
 
     $typs =  array_values($typs);
-    if (sizeof($cats) > 0 ) {
+    if (sizeof($typs) > 0 ) {
         $agenda->type = $typs[0]->name;
     } else {
         $agenda->type = '-';
