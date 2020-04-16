@@ -154,20 +154,20 @@ foreach ($inscriptions_array as $inscription) {
 
 
 
-$encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+// $encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
 
 
 
-$filename = $file . '_' . date('Y-m-d_H-i', time());
-header('Content-type: application/vnd.ms-excel');
-header('Content-disposition: csv' . date('Y-m-d') . '.csv');
-header('Content-disposition: filename=' . $filename . '.csv');
-header('Content-Length: ' . strlen($encoded_csv));
-$encoded_csv =   chr(255) . chr(254) . $encoded_csv;
-print $encoded_csv;
+// $filename = $file . '_' . date('Y-m-d_H-i', time());
+// header('Content-type: application/vnd.ms-excel');
+// header('Content-disposition: csv' . date('Y-m-d') . '.csv');
+// header('Content-disposition: filename=' . $filename . '.csv');
+// header('Content-Length: ' . strlen($encoded_csv));
+// $encoded_csv =   chr(255) . chr(254) . $encoded_csv;
+// print $encoded_csv;
 
 
-// header('Content-type: text/html' );
-// print_r($data);
+header('Content-type: text/html');
+print_r($data);
 
 exit;
