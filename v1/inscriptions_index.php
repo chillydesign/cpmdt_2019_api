@@ -104,9 +104,9 @@ foreach ($inscriptions_array as $inscription) {
                 $loc_titles = array();
                 $location_ids = explode(' | ', $metafield_string);
                 foreach ($location_ids as $location_id) {
-                    $location = get_post($location_id);
+                    $other_location = get_post($location_id);
                     if ($post) {
-                        $loc_titles = array_push($loc_titles, $post->post_title);
+                        $loc_titles = array_push($loc_titles, $other_location->post_title);
                     }
                 }
                 $metafield_string = implode(' | ', $loc_titles);
