@@ -811,7 +811,7 @@ if (!function_exists('api_split_number_into_chunks')) {
 			array_push($ret, $bit);
 		}
 
-		return implode($ret, ' ');
+		return implode(' ', $ret);
 	}
 }
 
