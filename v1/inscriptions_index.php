@@ -105,9 +105,11 @@ foreach ($inscriptions_array as $inscription) {
                 $location_ids = explode(' | ', $metafield_string);
                 if (sizeof($location_ids > 0)) {
                     foreach ($location_ids as $location_id) {
-                        $other_location = get_post($location_id);
-                        if ($other_location) {
-                            array_push($loc_titles, $other_location->post_title);
+                        if ($location_id != 0  && $location_id != '0' && $location_id != '') {
+                            $other_location = get_post($location_id);
+                            if ($other_location) {
+                                array_push($loc_titles, $other_location->post_title);
+                            }
                         }
                     }
                     $metafield_string = implode(' | ', $loc_titles);
