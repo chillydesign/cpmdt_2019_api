@@ -111,6 +111,8 @@ foreach ($inscriptions_array as $inscription) {
                         }
                     }
                     $metafield_string = implode(' | ', $loc_titles);
+                } else {
+                    $metafield_string = '';
                 }
             } else if ($field == 'telephone_private' || $field == 'telephone_professional' || $field == 'telephone_portable') {
                 // format number into either suisse or french format
