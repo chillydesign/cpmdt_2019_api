@@ -107,7 +107,7 @@ foreach ($inscriptions_array as $inscription) {
                     foreach ($location_ids as $location_id) {
                         $other_location = get_post($location_id);
                         if ($other_location) {
-                            $loc_titles = array_push($loc_titles, $other_location->post_title);
+                            array_push($loc_titles, $other_location->post_title);
                         }
                     }
                     $metafield_string .= implode(' | ', $loc_titles);
