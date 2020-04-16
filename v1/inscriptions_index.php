@@ -103,13 +103,15 @@ foreach ($inscriptions_array as $inscription) {
 
                 $loc_titles = array();
                 $location_ids = explode(' | ', $metafield_string);
-                foreach ($location_ids as $location_id) {
-                    $other_location = get_post($location_id);
-                    if ($other_location) {
-                        $loc_titles = array_push($loc_titles, $other_location->post_title);
+                if (sizeof($location_ids > 0)) {
+                    foreach ($location_ids as $location_id) {
+                        $other_location = get_post($location_id);
+                        if ($other_location) {
+                            $loc_titles = array_push($loc_titles, $other_location->post_title);
+                        }
                     }
+                    $metafield_string .= implode(' | ', $loc_titles);
                 }
-                $metafield_string = implode(' | ', $loc_titles);
             } else if ($field == 'telephone_private' || $field == 'telephone_professional' || $field == 'telephone_portable') {
                 // format number into either suisse or french format
                 $metafield_string =   api_format_phone_number($metafield_string);
