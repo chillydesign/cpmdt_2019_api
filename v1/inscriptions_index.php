@@ -100,7 +100,16 @@ foreach ($inscriptions_array as $inscription) {
                     $metafield_string = '';
                 }
             } else if ($field == 'other_place_possible_ids' || $field == 'musical_other_place_possible_ids') {
-                $metafield_string =   $metafield_string;
+
+                $loc_titles = array();
+                $location_ids = explode(' | ', $metafield_string);
+                foreach ($location_ids as $location_id) {
+                    $location = get_post($location_id);
+                    if ($post) {
+                        $loc_titles = array_push($loc_titles, $post->post_title);
+                    }
+                }
+                $metafield_string = implode(' | ', $loc_titles);
             } else if ($field == 'telephone_private' || $field == 'telephone_professional' || $field == 'telephone_portable') {
                 // format number into either suisse or french format
                 $metafield_string =   api_format_phone_number($metafield_string);
