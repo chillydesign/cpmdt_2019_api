@@ -116,12 +116,13 @@ foreach ($inscriptions_array as $inscription) {
 
 
                 if ($metafield_string_ids != '' && $metafield_string_ids != null) {
-                    $loc_titles = array();
-                    if (is_array($metafield_string_ids)) {
-                        $location_ids = explode(' | ', $metafield_string_ids);
-                    } else {
-                        $location_ids = array($metafield_string_ids);
+
+                    if (!is_array($metafield_string_ids)) {
+                        $metafield_string_ids = array($metafield_string_ids);
                     }
+
+                    $loc_titles = array();
+                    $location_ids = explode(' | ', $metafield_string_ids);
 
                     var_dump($location_ids);
 
