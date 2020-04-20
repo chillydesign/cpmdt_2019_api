@@ -47,6 +47,9 @@ $inscription_musical_other_place_ids = api_get_booking_metafield($inscription_id
 
 
 
+var_dump($inscription_other_place_ids);
+
+
 $data =  implode(';', $all_fields) .  ';ID' .  "\n";
 
 
@@ -114,7 +117,7 @@ foreach ($inscriptions_array as $inscription) {
 
                 if ($metafield_string_ids != '' && $metafield_string_ids != null) {
                     $loc_titles = array();
-                    $location_ids = explode(' | ', $metafield_string);
+                    $location_ids = explode(' | ', $metafield_string_ids);
                     if (sizeof($location_ids > 0)) {
                         foreach ($location_ids as $location_id) {
                             if ($location_id != 0  && $location_id != '0' && $location_id != '') {
@@ -183,7 +186,9 @@ foreach ($inscriptions_array as $inscription) {
 // print $encoded_csv;
 
 
-header('Content-type: text/html');
-print_r($data);
+// header('Content-type: text/html');
+// print_r($data);
+
+echo json_encode($meta_strings);
 
 exit;
