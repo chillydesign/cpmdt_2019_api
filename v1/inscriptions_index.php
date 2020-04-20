@@ -114,18 +114,9 @@ foreach ($inscriptions_array as $inscription) {
                 }
 
 
-
                 if ($metafield_string_ids != '' && $metafield_string_ids != null) {
-
-                    if (!is_array($metafield_string_ids)) {
-                        $metafield_string_ids = array($metafield_string_ids);
-                    }
-
                     $loc_titles = array();
                     $location_ids = explode(' | ', $metafield_string_ids);
-
-                    var_dump($location_ids);
-
                     if (sizeof($location_ids > 0)) {
                         foreach ($location_ids as $location_id) {
                             if ($location_id != 0  && $location_id != '0' && $location_id != '') {
