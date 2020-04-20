@@ -120,7 +120,7 @@ foreach ($inscriptions_array as $inscription) {
                     if (is_array($metafield_string_ids)) {
                         $location_ids = explode(' | ', $metafield_string_ids);
                     } else {
-                        $location_ids = $metafield_string_ids;
+                        $location_ids = array($metafield_string_ids);
                     }
 
                     var_dump($location_ids);
