@@ -47,8 +47,6 @@ $inscription_musical_other_place_ids = api_get_booking_metafield($inscription_id
 
 
 
-var_dump($inscription_other_place_ids);
-
 
 $data =  implode(';', $all_fields) .  ';ID' .  "\n";
 
@@ -131,7 +129,7 @@ foreach ($inscriptions_array as $inscription) {
                         $metafield_string = '';
                     }
                 } else {
-                    $metafield_string .= 'HELLO CHARLES';
+                    // DO NOTHING
                 };
             } else if ($field == 'telephone_private' || $field == 'telephone_professional' || $field == 'telephone_portable') {
                 // format number into either suisse or french format
@@ -177,19 +175,19 @@ foreach ($inscriptions_array as $inscription) {
 
 
 
-// $encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
-// $filename = $file . '_' . date('Y-m-d_H-i', time());
-// header('Content-type: application/vnd.ms-excel');
-// header('Content-disposition: csv' . date('Y-m-d') . '.csv');
-// header('Content-disposition: filename=' . $filename . '.csv');
-// header('Content-Length: ' . strlen($encoded_csv));
-// $encoded_csv =   chr(255) . chr(254) . $encoded_csv;
-// print $encoded_csv;
+$encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+$filename = $file . '_' . date('Y-m-d_H-i', time());
+header('Content-type: application/vnd.ms-excel');
+header('Content-disposition: csv' . date('Y-m-d') . '.csv');
+header('Content-disposition: filename=' . $filename . '.csv');
+header('Content-Length: ' . strlen($encoded_csv));
+$encoded_csv =   chr(255) . chr(254) . $encoded_csv;
+print $encoded_csv;
 
 
 // header('Content-type: text/html');
 // print_r($data);
 
-echo json_encode($inscription_results);
+// echo json_encode($inscription_results);
 
 exit;
