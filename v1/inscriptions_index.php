@@ -42,6 +42,9 @@ $inscription_housenumber = api_get_booking_metafield($inscription_ids, 'housenum
 $inscription_housenumber_guardian = api_get_booking_metafield($inscription_ids, 'housenumber_guardian');
 $inscription_course_option = api_get_booking_metafield($inscription_ids, 'course_option');
 
+$inscription_other_place_ids = api_get_booking_metafield($inscription_ids, 'other_place_possible_ids');
+$inscription_musical_other_place_ids = api_get_booking_metafield($inscription_ids, 'musical_other_place_possible_ids');
+
 
 
 $data =  implode(';', $all_fields) .  ';ID' .  "\n";
@@ -99,23 +102,35 @@ foreach ($inscriptions_array as $inscription) {
                 } else {
                     $metafield_string = '';
                 }
-            } else if ($field == 'other_place_possible_ids' || $field == 'musical_other_place_possible_ids') {
+            } else if ($field == 'other_place_possible' || $field == 'musical_other_place_possible') {
 
-                $loc_titles = array();
-                $location_ids = explode(' | ', $metafield_string);
-                if (sizeof($location_ids > 0)) {
-                    foreach ($location_ids as $location_id) {
-                        if ($location_id != 0  && $location_id != '0' && $location_id != '') {
-                            $other_location = get_post($location_id);
-                            if ($other_location) {
-                                array_push($loc_titles, $other_location->post_title);
+                if ($field == 'other_place_possible') {
+                    $metafield_string_ids =  api_get_result_from_array($inscription_other_place_ids, $inscription);
+                } else {
+                    $metafield_string_ids =  api_get_result_from_array($inscription_musical_other_place_ids, $inscription);
+                }
+
+                var_dump($metafield_string_ids);
+
+                if ($metafield_string_ids != '' && $metafield_string_ids != null) {
+                    $loc_titles = array();
+                    $location_ids = explode(' | ', $metafield_string);
+                    if (sizeof($location_ids > 0)) {
+                        foreach ($location_ids as $location_id) {
+                            if ($location_id != 0  && $location_id != '0' && $location_id != '') {
+                                $other_location = get_post($location_id);
+                                if ($other_location) {
+                                    array_push($loc_titles, $other_location->post_title);
+                                }
                             }
                         }
+                        $metafield_string = implode(' | ', $loc_titles);
+                    } else {
+                        $metafield_string = '';
                     }
-                    $metafield_string = implode(' | ', $loc_titles);
                 } else {
-                    $metafield_string = '';
-                }
+                    $metafield_string .= 'HELLO CHARLES';
+                };
             } else if ($field == 'telephone_private' || $field == 'telephone_professional' || $field == 'telephone_portable') {
                 // format number into either suisse or french format
                 $metafield_string =   api_format_phone_number($metafield_string);
@@ -158,20 +173,17 @@ foreach ($inscriptions_array as $inscription) {
 
 
 
-$encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+// $encoded_csv = mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+// $filename = $file . '_' . date('Y-m-d_H-i', time());
+// header('Content-type: application/vnd.ms-excel');
+// header('Content-disposition: csv' . date('Y-m-d') . '.csv');
+// header('Content-disposition: filename=' . $filename . '.csv');
+// header('Content-Length: ' . strlen($encoded_csv));
+// $encoded_csv =   chr(255) . chr(254) . $encoded_csv;
+// print $encoded_csv;
 
 
-
-$filename = $file . '_' . date('Y-m-d_H-i', time());
-header('Content-type: application/vnd.ms-excel');
-header('Content-disposition: csv' . date('Y-m-d') . '.csv');
-header('Content-disposition: filename=' . $filename . '.csv');
-header('Content-Length: ' . strlen($encoded_csv));
-$encoded_csv =   chr(255) . chr(254) . $encoded_csv;
-print $encoded_csv;
-
-
-// header('Content-type: text/html');
-// print_r($data);
+header('Content-type: text/html');
+print_r($data);
 
 exit;
