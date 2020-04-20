@@ -170,12 +170,6 @@ if ($post_times) {
     foreach ($post_times as $pt) {
         if ($pt['horaires']) {
             if ($pt['horaires'] != '') {
-                foreach ($pt->teachers as $teacher) {
-                    $teacher =  api_remove_unnecessary_things($teacher);
-                }
-                $pt->location =  api_remove_unnecessary_things($pt->location);
-
-
                 array_push($rettimes, $pt);
             }
         }
