@@ -71,8 +71,9 @@ $location = array_filter(
 // $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
 $course_location_ids =  array_values(array_map('api_get_wid_from_object', $location));
 
-$post->locations = $location;
-$post->location_ids = $course_location_ids;
+$post->location_ids = array_unique($course_location_ids);
+$post->locations = array_unique($location);
+
 
 
 // get the zone
