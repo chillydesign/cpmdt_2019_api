@@ -71,8 +71,19 @@ $location = array_filter(
 // $course_location_ids =  array_values(array_map(create_function('$p', 'return $p->wid;'), $location));
 $course_location_ids =  array_values(array_map('api_get_wid_from_object', $location));
 
+
 $post->location_ids = array_unique($course_location_ids);
-$post->locations = array_unique($location);
+
+$unique_locations = array();
+foreach ($post->location_ids as $lid) {
+    foreach ($location as $loc) {
+        if ($loc->wid == $lid) {
+            array_push($unique_locations, $loc);
+            break;
+        }
+    }
+}
+$post->locations = $unique_locations;
 
 
 
