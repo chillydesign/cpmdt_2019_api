@@ -29,7 +29,7 @@ $inscriptions_array = get_posts($insc_args);
 // $inscription_ids =  array_map(create_function('$p', 'return $p->ID;'), $inscriptions_array);
 $inscription_ids =  array_map('api_get_id_from_object', $inscriptions_array);
 
-
+$inscription_results = array();
 
 
 foreach ($all_fields as $field => $value) {
@@ -165,6 +165,8 @@ foreach ($inscriptions_array as $inscription) {
 
         $ar =  $meta_strings;
 
+        array_push($inscription_results, $meta_strings);
+
         $data .=  implode(';', $ar);
         $data .=  "\n";
     }
@@ -189,6 +191,6 @@ foreach ($inscriptions_array as $inscription) {
 // header('Content-type: text/html');
 // print_r($data);
 
-echo json_encode($meta_strings);
+echo json_encode($inscription_results);
 
 exit;
