@@ -113,11 +113,18 @@ foreach ($inscriptions_array as $inscription) {
                     $metafield_string_ids =  api_get_result_from_array($inscription_musical_other_place_ids, $inscription);
                 }
 
-                var_dump($metafield_string_ids);
+
 
                 if ($metafield_string_ids != '' && $metafield_string_ids != null) {
                     $loc_titles = array();
-                    $location_ids = explode(' | ', $metafield_string_ids);
+                    if (is_array($metafield_string_ids)) {
+                        $location_ids = explode(' | ', $metafield_string_ids);
+                    } else {
+                        $location_ids = $metafield_string_ids;
+                    }
+
+                    var_dump($location_ids);
+
                     if (sizeof($location_ids > 0)) {
                         foreach ($location_ids as $location_id) {
                             if ($location_id != 0  && $location_id != '0' && $location_id != '') {
