@@ -44,6 +44,7 @@ $inscription_course_option = api_get_booking_metafield($inscription_ids, 'course
 
 $inscription_other_place_ids = api_get_booking_metafield($inscription_ids, 'other_place_possible_ids');
 $inscription_musical_other_place_ids = api_get_booking_metafield($inscription_ids, 'musical_other_place_possible_ids');
+$inscription_location_times = api_get_booking_metafield($inscription_ids, 'location_time');
 
 
 
@@ -102,6 +103,13 @@ foreach ($inscriptions_array as $inscription) {
                     }
                 } else {
                     $metafield_string = '';
+                }
+
+                if ($field == 'location_id') {
+                    $metafield_loctime =  api_get_result_from_array($inscription_location_times, $inscription);
+                    if ($metafield_loctime != null && $metafield_loctime != '') {
+                        $metafield_string = $metafield_loctime;
+                    }
                 }
             } else if ($field == 'other_place_possible' || $field == 'musical_other_place_possible') {
 
