@@ -123,16 +123,20 @@ foreach ($inscriptions_array as $inscription) {
                 if ($metafield_string_ids != '' && $metafield_string_ids != null) {
                     $loc_titles = array();
                     $location_ids = explode(' | ', $metafield_string_ids);
-                    if (sizeof($location_ids > 0)) {
-                        foreach ($location_ids as $location_id) {
-                            if ($location_id != 0  && $location_id != '0' && $location_id != '') {
-                                $other_location = get_post($location_id);
-                                if ($other_location) {
-                                    array_push($loc_titles, $other_location->post_title);
+                    if (is_array($location_ids)) {
+                        if (sizeof($location_ids > 0)) {
+                            foreach ($location_ids as $location_id) {
+                                if ($location_id != 0  && $location_id != '0' && $location_id != '') {
+                                    $other_location = get_post($location_id);
+                                    if ($other_location) {
+                                        array_push($loc_titles, $other_location->post_title);
+                                    }
                                 }
                             }
+                            $metafield_string = implode(' | ', $loc_titles);
+                        } else {
+                            $metafield_string = '';
                         }
-                        $metafield_string = implode(' | ', $loc_titles);
                     } else {
                         $metafield_string = '';
                     }
