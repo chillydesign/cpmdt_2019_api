@@ -10,8 +10,8 @@ require_once('../../wp-config.php');
 include('connect.php');
 include('functions.php');
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 
 if ( isset($_GET['course_id'])  ) {
@@ -26,9 +26,3 @@ if ( isset($_GET['course_id'])  ) {
 } else {
     include('courses_index.php');
 }
-
-
-
-
-
-?>
