@@ -124,8 +124,7 @@ foreach ($inscriptions_array as $inscription) {
                     $loc_titles = array();
                     $location_ids = explode(' | ', $metafield_string_ids);
                     if (is_array($location_ids)) {
-                        var_dump($location_ids);
-                        if (sizeof($location_ids > 0)) {
+                        if (sizeof($location_ids) > 0) {
 
                             foreach ($location_ids as $location_id) {
                                 if ($location_id != 0  && $location_id != '0' && $location_id != '') {
