@@ -5,11 +5,11 @@ $posts_array = get_posts(
     array(
         'post_type'  => 'programme',
         'posts_per_page' => -1,
-        'post_status' => 'publish' ,
+        'post_status' => 'publish',
         'orderby' => 'menu_order',
-        'order'=> 'ASC'
-      )
-   );
+        'order' => 'ASC'
+    )
+);
 // $post_ids =  array_map(create_function('$p', 'return $p->ID;'), $posts_array);
 $post_ids =  array_map('api_get_id_from_object', $posts_array);
 
@@ -42,7 +42,7 @@ foreach ($posts_array as $post) {
     $post->categories = array_values($cats);
 
 
-    if (sizeof($post->categories) > 0 ) {
+    if (sizeof($post->categories) > 0) {
         $post->slug = $post->categories[0]->slug;
     } else {
         $post->slug = '';
@@ -61,7 +61,6 @@ foreach ($posts_array as $post) {
     if (sizeof($agrang_val) > 0) {
         // $post->age_ranges =  (array_map(create_function('$p', 'return $p->slug;'), $agrang_val));
         $post->age_ranges =  array_map('api_get_slug_from_object', $agrang_val);
-
     } else {
         $post->age_ranges = array();
     }
@@ -79,7 +78,7 @@ foreach ($posts_array as $post) {
     $hsear =  array_values(array_map('api_get_meta_value_from_object', $hsea));
 
     if ($hsear) {
-        $post->hide_in_search = ($hsear[0] == 1 || $hsear[0] == '1' );
+        $post->hide_in_search = ($hsear[0] == 1 || $hsear[0] == '1');
     }
 
 
@@ -148,7 +147,7 @@ foreach ($posts_array as $post) {
             foreach ($zones as $zonearray) {
                 $zones_ds = maybe_unserialize($zonearray);
                 if (is_array($zones_ds)) {
-                    foreach($zones_ds as $zid) {
+                    foreach ($zones_ds as $zid) {
                         array_push($return_zone_ids, $zid);
                     }
                 }
@@ -175,14 +174,14 @@ foreach ($posts_array as $post) {
     );
     $prof_array = array();
     foreach ($professuers as $post_meta) {
-        if ($post_meta->meta_key[0] != '_' && $post_meta->meta_value != '' ) {
+        if ($post_meta->meta_key[0] != '_' && $post_meta->meta_value != '') {
 
-            if (  strlen($post_meta->meta_value) > 1 ) {
-                if ( $post_meta->meta_value[1] == ':' ) {  // it is a serialised array
+            if (strlen($post_meta->meta_value) > 1) {
+                if ($post_meta->meta_value[1] == ':') {  // it is a serialised array
                     $unserialised = unserialize($post_meta->meta_value);
 
                     // horrible bug where array is serialized twice
-                    if ( is_string($unserialised)  ) {
+                    if (is_string($unserialised)) {
                         if ($unserialised[1] == ':') {
                             $unserialised = unserialize($unserialised);
                         }
@@ -190,25 +189,24 @@ foreach ($posts_array as $post) {
 
 
                     foreach ($unserialised as $teacher_id) {
-                        array_push($prof_array,  $teacher_id );
+                        array_push($prof_array,  $teacher_id);
                     }
-
                 } else {
                     //    array_push($prof_array,  $post_meta->meta_value );
                 }
-
             } else {
-                array_push($prof_array,  $post_meta->meta_value );
+                array_push($prof_array,  $post_meta->meta_value);
             }
-
-
         }
     }
     $post->professuers = array_values(array_unique($prof_array));
 
 
 
-
+    $url = get_permalink($post->ID);
+    if ($url) {
+        $post->guid = $url;
+    }
 
 
     $post->image = api_thumbnail_of_post_url($post->ID, 'medium');
@@ -217,8 +215,8 @@ foreach ($posts_array as $post) {
     $searchable_fields = array($post->post_title);
     $searchable_fields = implode('  ', $searchable_fields);
     $searchable_fields = wp_strip_all_tags($searchable_fields);
-    $searchable_fields = str_replace(array("\n","\r"), ' ', $searchable_fields);
-    $searchable_fields = str_replace(array("!","’" , ',' , '/' ,':', ';', "?", '.', '–' ), ' ', $searchable_fields);
+    $searchable_fields = str_replace(array("\n", "\r"), ' ', $searchable_fields);
+    $searchable_fields = str_replace(array("!", "’", ',', '/', ':', ';', "?", '.', '–'), ' ', $searchable_fields);
     $searchable_fields = remove_accents($searchable_fields);
     $searchable_fields = strtolower($searchable_fields);
     $post->searchfield = $searchable_fields;
@@ -230,20 +228,16 @@ foreach ($posts_array as $post) {
 
 
     // remove unncessary params
-    $unncessary_params = ['comment_count', 'post_status', 'post_mime_type',  'ping_status', 'comment_status' , 'post_date_gmt',  'post_modified_gmt', 'post_password',  'post_excerpt', 'pinged', 'to_ping', 'filter', 'post_content_filtered'];
+    $unncessary_params = ['comment_count', 'post_status', 'post_mime_type',  'ping_status', 'comment_status', 'post_date_gmt',  'post_modified_gmt', 'post_password',  'post_excerpt', 'pinged', 'to_ping', 'filter', 'post_content_filtered'];
     foreach ($unncessary_params as $up) {
         unset($post->$up);
     }
-
-
-
-
 }
 
 
 
 
-echo json_encode( $posts_array ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK );
+echo json_encode($posts_array,  JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
 
 
 
@@ -256,6 +250,3 @@ echo json_encode( $posts_array ,  JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|
 // );
 // $loc =  reset(array_values($location))->wid ;
 // $post->location = ($loc != null) ? $loc : '';
-
-
-?>
