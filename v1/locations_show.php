@@ -22,15 +22,10 @@ $courses = courses_from_location_id($location_id);
 
 foreach ($courses as $course) {
     $times = get_field('times',  $course->ID);
-
-    api_remove_unnecessary($course);
-    $course->times = $times;
-
-
+    // api_remove_unnecessary($course);
+    // $course->times = $times;
     $courses_html .= '<div class="single_course_for_location">';
     $courses_html .= '<h4><a href="' . $course->guid . '">' .  $course->post_title . '</a></h4><ul>';
-
-
     foreach ($times as $time) {
         if ($time['location']  && $time['location']->ID == $post->ID) {
             if ($time['teachers']) {
@@ -40,19 +35,13 @@ foreach ($courses as $course) {
             }
         }
     };
-
     $courses_html .= '</ul></div>';
 }
 
-
 $courses_html .= '<!-- end -->';
-
-
-$post->courses = $courses;
 $post->courses_html = $courses_html;
+// $post->courses = $courses;
 
-
-$courses;
 
 
 
