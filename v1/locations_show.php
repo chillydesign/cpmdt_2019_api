@@ -10,6 +10,9 @@ $post->description = get_field('description', $post->ID);
 $post->responsible = get_field('responsible', $post->ID);
 
 
+$post->cours_complementaires = get_field('cours_complementaires', $post->ID);
+
+
 
 
 // remove unncessary params
