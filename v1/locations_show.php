@@ -32,7 +32,7 @@ foreach ($courses as $course) {
 
 
     foreach ($times as $time) {
-        if ($time['location']  && $time['location']->ID == $location_id) {
+        if ($time['location']  && $time['location']->ID == $post->ID) {
             if ($time['teachers']) {
                 foreach ($time['teachers'] as $teacher) :
                     $courses_html .= ' <li>' . $teacher->post_title .  '</li>';
