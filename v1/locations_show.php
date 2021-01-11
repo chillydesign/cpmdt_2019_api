@@ -11,9 +11,17 @@ $post->responsible = get_field('responsible', $post->ID);
 $post->addresse = get_field('addresse', $post->ID);
 
 
-$cours_complementaires = get_field('cours_complementaires', $post->ID);
-// convert this to html
-$post->cours_complementaires = $cours_complementaires;
+// $cours_complementaires = get_field('cours_complementaires', $post->ID);
+
+
+
+$courses = courses_from_location_id($location_id);
+foreach ($courses as $course) {
+    $course->times = get_field('times',  $course->ID);
+}
+// // convert this to html
+$post->courses = $courses;
+
 
 
 
