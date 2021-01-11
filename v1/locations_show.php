@@ -15,13 +15,38 @@ $post->addresse = get_field('addresse', $post->ID);
 
 
 
+$courses_html = '<!--Start-->';
 $courses = courses_from_location_id($location_id);
+
+
+
 foreach ($courses as $course) {
-    $course->times = get_field('times',  $course->ID);
-    api_remove_unnecessary($course);
+    $times = get_field('times',  $course->ID);
+    $courses_html .= '<div class="single_course_for_location">';
+    $courses_html .= '<h4><a href="' . $course->guid . '">' .  $course->post_title . '</a></h4><ul>';
+
+
+    foreach ($times as $time) {
+        if ($time['location']  && $time['location']->ID == $location_id) {
+            if ($time['teachers']) {
+                foreach ($time['teachers'] as $teacher) :
+                    $courses_html .= ' <li>' . $teacher->post_title .  '</li>';
+                endforeach;
+            }
+        }
+    };
+
+    $courses_html .= '</ul></div>';
 }
-// // convert this to html
-$post->courses = $courses;
+
+
+$courses_html .= '<!-- end -->';
+
+
+$post->courses_html = $courses_html;
+
+
+$courses;
 
 
 
