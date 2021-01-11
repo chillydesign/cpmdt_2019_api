@@ -14,14 +14,15 @@ include('functions.php');
 // ini_set('display_errors', 1);
 
 
-if ( isset($_GET['course_id'])  ) {
+if (isset($_GET['course_id'])) {
     include('courses_show.php');
-
-} else if ( isset($_GET['bookings'])  ) {
+} else if (isset($_GET['location_id'])) {
+    include('locations_show.php');
+} else if (isset($_GET['bookings'])) {
     include('bookings_index.php');
-}  else if ( isset($_GET['inscriptions'])  ) {
+} else if (isset($_GET['inscriptions'])) {
     include('inscriptions_index.php');
-}  else if ( isset($_GET['agenda'])  ) {
+} else if (isset($_GET['agenda'])) {
     include('agenda_index.php');
 } else {
     include('courses_index.php');
