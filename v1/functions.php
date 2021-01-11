@@ -7,8 +7,7 @@
 // setlocale(LC_CTYPE, 'en_AU.utf8');
 
 if (!function_exists('api_normal_chars')) {
-	function api_normal_chars($string)
-	{
+	function api_normal_chars($string) {
 
 		$str = remove_accents($string);
 		//	$str =  iconv('UTF-8','ASCII//TRANSLIT',$string);
@@ -17,8 +16,7 @@ if (!function_exists('api_normal_chars')) {
 }
 
 if (!function_exists('api_get_request_courses')) {
-	function api_get_request_courses($request_ids)
-	{
+	function api_get_request_courses($request_ids) {
 		global $conn;
 		if (sizeof($request_ids) > 0) :
 			// GET CATEGORIES
@@ -40,8 +38,7 @@ if (!function_exists('api_get_request_courses')) {
 
 
 if (!function_exists('api_get_request_times')) {
-	function api_get_request_times($request_ids)
-	{
+	function api_get_request_times($request_ids) {
 		global $conn;
 		if (sizeof($request_ids) > 0) :
 			// GET CATEGORIES
@@ -61,8 +58,7 @@ if (!function_exists('api_get_request_times')) {
 }
 
 if (!function_exists('api_get_request_emails')) {
-	function api_get_request_emails($request_ids)
-	{
+	function api_get_request_emails($request_ids) {
 		global $conn;
 		if (sizeof($request_ids) > 0) :
 
@@ -82,8 +78,7 @@ if (!function_exists('api_get_request_emails')) {
 }
 
 if (!function_exists('api_get_booking_metafield')) {
-	function api_get_booking_metafield($request_ids, $field)
-	{
+	function api_get_booking_metafield($request_ids, $field) {
 		global $conn;
 		if (sizeof($request_ids) > 0) :
 
@@ -107,8 +102,7 @@ if (!function_exists('api_get_booking_metafield')) {
 
 
 if (!function_exists('api_get_course_ageranges')) {
-	function api_get_course_ageranges($course_ids)
-	{
+	function api_get_course_ageranges($course_ids) {
 		global $conn;
 
 		if (sizeof($course_ids) > 0) :
@@ -133,8 +127,7 @@ if (!function_exists('api_get_course_ageranges')) {
 
 
 if (!function_exists('api_get_course_cats')) {
-	function api_get_course_cats($course_ids)
-	{
+	function api_get_course_cats($course_ids) {
 		global $conn;
 
 		if (sizeof($course_ids) > 0) :
@@ -161,8 +154,7 @@ if (!function_exists('api_get_course_cats')) {
 
 
 if (!function_exists('api_get_course_descriptions')) {
-	function api_get_course_descriptions($course_ids)
-	{
+	function api_get_course_descriptions($course_ids) {
 		global $conn;
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
@@ -182,8 +174,7 @@ if (!function_exists('api_get_course_descriptions')) {
 }
 
 if (!function_exists('api_remove_line_breaks')) {
-	function api_remove_line_breaks($string)
-	{
+	function api_remove_line_breaks($string) {
 
 		$new_string = str_replace(array("\r", "\n"), '', $string);
 		$new_string = str_replace(';', ' ', $new_string);
@@ -249,8 +240,7 @@ if (!function_exists('api_remove_line_breaks')) {
 
 
 if (!function_exists('api_get_course_extras')) {
-	function api_get_course_extras($course_ids)
-	{
+	function api_get_course_extras($course_ids) {
 		global $conn;
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
@@ -275,8 +265,7 @@ if (!function_exists('api_get_course_extras')) {
 
 
 if (!function_exists('api_get_course_schools')) {
-	function api_get_course_schools($course_ids)
-	{
+	function api_get_course_schools($course_ids) {
 		global $conn;
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
@@ -306,8 +295,7 @@ if (!function_exists('api_get_course_schools')) {
 
 
 if (!function_exists('api_get_course_professeurs')) {
-	function api_get_course_professeurs($course_ids)
-	{
+	function api_get_course_professeurs($course_ids) {
 		global $conn;
 		if (sizeof($course_ids) > 0) :
 			// GET professeurs
@@ -331,8 +319,7 @@ if (!function_exists('api_get_course_professeurs')) {
 
 
 if (!function_exists('api_get_course_locations')) {
-	function api_get_course_locations($course_ids)
-	{
+	function api_get_course_locations($course_ids) {
 		global $conn;
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
@@ -356,8 +343,7 @@ if (!function_exists('api_get_course_locations')) {
 
 
 if (!function_exists('api_get_course_zones')) {
-	function api_get_course_zones($location_ids)
-	{
+	function api_get_course_zones($location_ids) {
 		global $conn;
 		$location_ids =   array_unique(array_filter($location_ids));
 		if (sizeof($location_ids) > 0) :
@@ -381,8 +367,7 @@ if (!function_exists('api_get_course_zones')) {
 
 
 if (!function_exists('api_get_p_age')) {
-	function api_get_p_age($course_ids)
-	{
+	function api_get_p_age($course_ids) {
 
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
@@ -399,8 +384,7 @@ if (!function_exists('api_get_p_age')) {
 	}
 }
 if (!function_exists('api_get_p_age2')) {
-	function api_get_p_age2($course_ids)
-	{
+	function api_get_p_age2($course_ids) {
 		if (sizeof($course_ids) > 0) :
 			// GET CATEGORIES
 			global $wpdb;
@@ -416,8 +400,7 @@ if (!function_exists('api_get_p_age2')) {
 }
 
 if (!function_exists('api_get_hide_in_search')) {
-	function api_get_hide_in_search($course_ids)
-	{
+	function api_get_hide_in_search($course_ids) {
 		if (sizeof($course_ids) > 0) :
 			// GET META HIDE_IN_SEARCH
 			global $wpdb;
@@ -435,8 +418,7 @@ if (!function_exists('api_get_hide_in_search')) {
 
 
 if (!function_exists('api_remove_unnecessary_things')) {
-	function api_remove_unnecessary_things($object)
-	{
+	function api_remove_unnecessary_things($object) {
 
 		unset($object->to_ping);
 		unset($object->pinged);
@@ -458,8 +440,7 @@ if (!function_exists('api_remove_unnecessary_things')) {
 
 
 if (!function_exists('api_thumbnail_of_post_url')) {
-	function api_thumbnail_of_post_url($post_id,  $size = 'large')
-	{
+	function api_thumbnail_of_post_url($post_id,  $size = 'large') {
 
 		$image_id = get_post_thumbnail_id($post_id);
 		if ($image_id) {
@@ -472,8 +453,7 @@ if (!function_exists('api_thumbnail_of_post_url')) {
 }
 
 if (!function_exists('api_all_booking_fields')) {
-	function api_all_booking_fields()
-	{
+	function api_all_booking_fields() {
 		return array(
 
 			'no_people' => 'NOMBRE DE PERSONNE',
@@ -498,8 +478,7 @@ if (!function_exists('api_all_booking_fields')) {
 
 
 if (!function_exists('api_all_booking_fields_headers')) {
-	function api_all_booking_fields_headers()
-	{
+	function api_all_booking_fields_headers() {
 
 		$fields = api_all_booking_fields();
 		$headers = array();
@@ -516,8 +495,7 @@ if (!function_exists('api_all_booking_fields_headers')) {
 
 
 if (!function_exists('api_all_agenda_fields')) {
-	function api_all_agenda_fields()
-	{
+	function api_all_agenda_fields() {
 		return array(
 			'a_date' => "Date de l'événement",
 			'a_time' => "Heure de l'événement",
@@ -531,8 +509,7 @@ if (!function_exists('api_all_agenda_fields')) {
 
 
 if (!function_exists('api_all_agenda_fields_headers')) {
-	function api_all_agenda_fields_headers()
-	{
+	function api_all_agenda_fields_headers() {
 
 		$fields = api_all_agenda_fields();
 		$headers = array();
@@ -550,8 +527,7 @@ if (!function_exists('api_all_agenda_fields_headers')) {
 
 
 if (!function_exists('api_process_metafield')) {
-	function api_process_metafield($metafield)
-	{
+	function api_process_metafield($metafield) {
 
 
 		$string = (sizeof($metafield) == 1)  ?  $metafield[0] : '';
@@ -582,8 +558,7 @@ if (!function_exists('api_process_metafield')) {
 
 
 if (!function_exists('api_get_agenda_cats')) {
-	function api_get_agenda_cats($agenda_ids)
-	{
+	function api_get_agenda_cats($agenda_ids) {
 		global $conn;
 
 		if (sizeof($agenda_ids) > 0) :
@@ -607,8 +582,7 @@ if (!function_exists('api_get_agenda_cats')) {
 
 
 if (!function_exists('api_get_agenda_programs')) {
-	function api_get_agenda_programs($agenda_ids)
-	{
+	function api_get_agenda_programs($agenda_ids) {
 		global $conn;
 
 		if (sizeof($agenda_ids) > 0) :
@@ -632,8 +606,7 @@ if (!function_exists('api_get_agenda_programs')) {
 
 
 if (!function_exists('api_get_agenda_types')) {
-	function api_get_agenda_types($agenda_ids)
-	{
+	function api_get_agenda_types($agenda_ids) {
 		global $conn;
 
 		if (sizeof($agenda_ids) > 0) :
@@ -660,8 +633,7 @@ if (!function_exists('api_get_agenda_types')) {
 
 
 if (!function_exists('api_is_serialized')) {
-	function api_is_serialized($string)
-	{
+	function api_is_serialized($string) {
 		return (@unserialize($string) !== false);
 	}
 }
@@ -673,8 +645,7 @@ if (!function_exists('api_is_serialized')) {
 
 
 if (!function_exists('api_all_inscription_fields')) {
-	function api_all_inscription_fields()
-	{
+	function api_all_inscription_fields() {
 		return array(
 
 			'last_name' =>  'Nom de l\'élève',
@@ -734,8 +705,7 @@ if (!function_exists('api_all_inscription_fields')) {
 // Nom de l'élève;Prénom de l'élève;Sexe;Date de naissance;Adresse;N° postal;Ville;Titre;Nom;Prénom;Adresse si différente de l'élève;N°postal;Ville;Téléphone privé;Téléphone professionnel;Téléphone portable;Courriel;Contribuable à Genève;Je paierai ma facture en;Choix du cours;Professeur;Lieu;Autre lieu possible;Autorisation photo;Conditions générales;Conditions générales;Date de l’inscription;Comment avez-vous eu connaissance de notre école?;Remarques si nécessaire;IP;ID
 
 if (!function_exists('api_all_inscription_fields_47musicale')) {
-	function api_all_inscription_fields_47musicale()
-	{
+	function api_all_inscription_fields_47musicale() {
 		return array(
 
 			'last_name' =>  'Nom de l\'élève',
@@ -781,8 +751,7 @@ if (!function_exists('api_all_inscription_fields_47musicale')) {
 
 
 if (!function_exists('api_remove_spaces_from_number')) {
-	function api_remove_spaces_from_number($number)
-	{
+	function api_remove_spaces_from_number($number) {
 		return str_replace(" ", "", $number);
 	}
 }
@@ -790,8 +759,7 @@ if (!function_exists('api_remove_spaces_from_number')) {
 
 
 if (!function_exists('api_number_is_french')) {
-	function api_number_is_french($number)
-	{
+	function api_number_is_french($number) {
 		$number =  api_remove_spaces_from_number($number);
 		if (substr($number, 0, 4) == '0033') {
 			return true;
@@ -804,8 +772,7 @@ if (!function_exists('api_number_is_french')) {
 }
 
 if (!function_exists('api_split_number_into_chunks')) {
-	function api_split_number_into_chunks($number, $chunks)
-	{
+	function api_split_number_into_chunks($number, $chunks) {
 		$offset = 0;
 		$ret = array();
 
@@ -821,26 +788,22 @@ if (!function_exists('api_split_number_into_chunks')) {
 
 
 if (!function_exists('api_get_id_from_object')) {
-	function api_get_id_from_object($obj)
-	{
+	function api_get_id_from_object($obj) {
 		return $obj->ID;
 	}
 }
 if (!function_exists('api_get_wid_from_object')) {
-	function api_get_wid_from_object($obj)
-	{
+	function api_get_wid_from_object($obj) {
 		return $obj->wid;
 	}
 }
 if (!function_exists('api_get_meta_value_from_object')) {
-	function api_get_meta_value_from_object($obj)
-	{
+	function api_get_meta_value_from_object($obj) {
 		return $obj->meta_value;
 	}
 }
 if (!function_exists('api_get_slug_from_object')) {
-	function api_get_slug_from_object($obj)
-	{
+	function api_get_slug_from_object($obj) {
 		return $obj->slug;
 	}
 }
@@ -848,8 +811,7 @@ if (!function_exists('api_get_slug_from_object')) {
 
 
 if (!function_exists('api_format_phone_number')) {
-	function api_format_phone_number($number)
-	{
+	function api_format_phone_number($number) {
 
 		$number = strval($number);
 
@@ -924,8 +886,7 @@ if (!function_exists('api_format_phone_number')) {
 
 
 if (!function_exists('api_format_address')) {
-	function api_format_address($address, $housenumber, $postcode)
-	{
+	function api_format_address($address, $housenumber, $postcode) {
 		if ($housenumber && $housenumber != null && $housenumber != '') {
 
 			if ($postcode && $postcode != null && $postcode != '') {
@@ -946,8 +907,7 @@ if (!function_exists('api_format_address')) {
 
 
 if (!function_exists('api_get_result_from_array')) {
-	function api_get_result_from_array($collection, $inscription)
-	{
+	function api_get_result_from_array($collection, $inscription) {
 		$metafield = array_filter(
 			$collection,
 			function ($e)  use ($inscription) {
@@ -960,5 +920,17 @@ if (!function_exists('api_get_result_from_array')) {
 
 		// turn it into a proper string to output
 		return api_process_metafield($metafield);
+	}
+}
+
+if (!function_exists('api_remove_unnecessary')) {
+	function api_remove_unnecessary($obj) {
+
+		// remove unncessary params
+		$unncessary_params = ['comment_count', 'post_status', 'post_mime_type',  'ping_status', 'comment_status', 'post_parent', 'post_date_gmt',  'post_modified_gmt', 'post_password',  'post_excerpt', 'pinged', 'to_ping', 'filter', 'post_content_filtered'];
+
+		foreach ($unncessary_params as $up) {
+			unset($obj->$up);
+		}
 	}
 }

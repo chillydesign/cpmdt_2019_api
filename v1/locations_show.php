@@ -18,18 +18,14 @@ $post->addresse = get_field('addresse', $post->ID);
 $courses = courses_from_location_id($location_id);
 foreach ($courses as $course) {
     $course->times = get_field('times',  $course->ID);
+    api_remove_unnecessary($course);
 }
 // // convert this to html
 $post->courses = $courses;
 
 
 
-
-// remove unncessary params
-$unncessary_params = ['comment_count', 'post_status', 'post_mime_type',  'ping_status', 'comment_status', 'post_parent', 'post_date_gmt',  'post_modified_gmt', 'post_password',  'post_excerpt', 'pinged', 'to_ping', 'filter', 'post_content_filtered'];
-foreach ($unncessary_params as $up) {
-    unset($post->$up);
-}
+api_remove_unnecessary($post);
 
 
 
