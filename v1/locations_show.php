@@ -8,10 +8,12 @@ $post = get_post($location_id);
 
 $post->description = get_field('description', $post->ID);
 $post->responsible = get_field('responsible', $post->ID);
+$post->addresse = get_field('addresse', $post->ID);
 
 
-$post->cours_complementaires = get_field('cours_complementaires', $post->ID);
-
+$cours_complementaires = get_field('cours_complementaires', $post->ID);
+// convert this to html
+$post->cours_complementaires = $cours_complementaires;
 
 
 
