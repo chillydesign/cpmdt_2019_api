@@ -18,7 +18,7 @@ $courses = courses_from_location_id($location_id);
 
 
 $courses_html = '<!--Start-->';
-// $courses_html .= '<h2 id="location_name"><a href="' .  $post->guid . '" id="location_link">' . $post->post_title  . '</a></h2>';
+$courses_html .= '<h2 id="location_name"><a href="' .  $post->guid . '" id="location_link">' . $post->post_title  . '</a></h2>';
 $courses_html .= '<p id="location_description">' . $post->description  . '</p>';
 $courses_html .= '<p id="location_responsible">' . $post->responsible  . '</p>';
 $courses_html .= '<p id="location_addresse">' . $post->addresse  . '</p>';
