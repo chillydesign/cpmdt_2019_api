@@ -14,9 +14,15 @@ $post->addresse = get_field('addresse', $post->ID);
 // $cours_complementaires = get_field('cours_complementaires', $post->ID);
 
 
-
-$courses_html = '<!--Start-->';
 $courses = courses_from_location_id($location_id);
+
+
+$location_link = $post->guid;
+$courses_html = '<!--Start--><h2 id="location_name"><a href="' . $location_link . '" id="location_link">' . $post->post_title  . '</a></h2>';
+$courses_html .= '<p id="location_description">' . $post->description  . '</p>';
+$courses_html .= '<p id="location_responsible">' . $post->responsible  . '</p>';
+$courses_html .= '<p id="location_addresse">' . $post->addresse  . '</p>';
+$courses_html .= '<h3>Disciplines enseignées:</h3><div class="location_courses_container">';
 
 
 
@@ -38,9 +44,12 @@ foreach ($courses as $course) {
     $courses_html .= '</ul></div>';
 }
 
-$courses_html .= '<!-- end -->';
+$courses_html .= '</div><!-- end -->';
 $post->courses_html = $courses_html;
 // $post->courses = $courses;
+
+
+
 
 
 
